@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trilha dos Agentes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- CSS do widget n8n -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(to right, #f1f1f1, #e0f7fa);
+      color: #333;
+    }
+
+    /* Estilo base da página (header, seção, professores...) omitido para brevidade */
+
+    /* ================ WRAPPER DO CHAT ================ */
+    #chat-wrapper {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: clamp(8px, 2vh, 20px);
+      background: rgba(0, 0, 0, 0.05);
+      z-index: 9999;
+      pointer-events: none; /* Faz com que a capa fique invisível para cliques fora do chat */
+    }
+
+    #chat-wrapper .chat-container {
+      width: 95%;
+      max-width: 900px;
+      height: 95%;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      pointer-events: all; /* Permite interação apenas dentro do chat */
+    }
+
+    @media (max-width: 600px) {
+      #chat-wrapper .chat-container {
+        width: 98%;
+        height: 98%;
+        border-radius: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Conteúdo da página (header, seção, professores…) aqui -->
+
+  <!-- Wrapper que cria estrutura e borda visual -->
+  <div id="chat-wrapper">
+    <div class="chat-container" id="n8n-chat"></div>
+  </div>
+
+  <!-- Script do chat n8n -->
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+      webhookUrl: 'https://n8n2.lemund.com.br/webhook/914bef90-8a98-4a9e-b7a1-be4a3834bc33/chat',
+      target: '#n8n-chat',         // agora é filho da DIV wrapper
+      mode: 'fullscreen',
+      showWelcomeScreen: true,
+      enableStreaming: false,
+      loadPreviousSession: true
+    });
+  </script>
+</body>
+</html>
